@@ -1,97 +1,262 @@
 <!DOCTYPE html>
 <html lang="sq">
 <head>
-<meta charset="UTF-8">
-<title>ChatKS - Dudi AI Pro</title>
-<style>
-body{background:#111;color:white;font-family:'Segoe UI',sans-serif;display:flex;justify-content:center;align-items:center;height:100vh;margin:0}
-#chat{width:90%;max-width:600px;height:80vh;background:#1e1e1e;border-radius:15px;display:flex;flex-direction:column;box-shadow:0 0 20px rgba(0,0,0,0.5)}
-#messages{flex:1;overflow-y:auto;padding:15px}
-.user{text-align:right;background:#4CAF50;padding:10px 14px;border-radius:12px;margin:6px 0;max-width:80%;margin-left:auto}
-.bot{text-align:left;background:#333;padding:10px 14px;border-radius:12px;margin:6px 0;max-width:80%;white-space:pre-wrap}
-.input-area{display:flex;padding:12px;border-top:1px solid #444}
-#userInput{flex:1;background:#2a2a2a;color:white;border:none;padding:12px;border-radius:8px;outline:none}
-#sendBtn{background:#4CAF50;color:white;border:none;padding:12px 22px;margin-left:10px;border-radius:8px;cursor:pointer;font-weight:bold}
-#sendBtn:hover{background:#45a049}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feja Islame E Drejt</title>
+  <style>
+    :root {
+      --primary: #d4af37;
+      --primary-hover: #f3e5ab;
+      --primary-glow: rgba(212, 175, 55, 0.4);
+      --bg-dark: #090d16;
+      --card-bg: #131b2e;
+      --text-light: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    * {box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;}
+    body {background-color: var(--bg-dark); color: var(--text-light); line-height: 1.6; overflow-x: hidden;}
+    header {background: rgba(9, 13, 22, 0.98); position: sticky; top: 0; z-index: 100; border-bottom: 2px solid var(--primary); box-shadow: 0 4px 20px var(--primary-glow);}
+    nav {max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.5rem; flex-wrap: wrap; gap: 1rem;}
+    .brand-container {display: flex; flex-direction: column;}
+    .logo {font-size: 1.5rem; font-weight: 800; color: var(--primary); text-decoration: none; text-transform: uppercase; letter-spacing: 1px; text-shadow: 0 0 10px var(--primary-glow);}
+    .subtitle-header {font-size: 0.75rem; color: #e2e8f0; font-style: italic;}
+    .nav-links {display: flex; gap: 1rem; list-style: none; align-items: center; flex-wrap: wrap;}
+    .nav-links a {color: var(--text-light); text-decoration: none; font-weight: 500; font-size: 0.95rem; transition: all 0.3s ease;}
+    .nav-links a:hover {color: var(--primary); text-shadow: 0 0 8px var(--primary-glow);}
+    .btn-auth {background: transparent; border: 2px solid var(--primary); color: var(--primary); padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-weight: bold; transition: 0.3s;}
+    .btn-auth:hover {background: var(--primary); color: var(--bg-dark);}
+    section {padding: 3rem 1.5rem; max-width: 1200px; margin: 0 auto;}
+    .hero {text-align: center; padding: 4rem 1.5rem; background: radial-gradient(circle at center, rgba(212,175,55,0.15) 0%, rgba(9,13,22,1) 80%); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 20px; margin-top: 1rem;}
+    .hero h1 {font-size: 2.5rem; color: var(--primary); margin-bottom: 0.5rem; text-shadow: 0 0 15px var(--primary-glow);}
+    .developer-credit {font-size: 0.95rem; color: #f1f5f9; font-weight: 600; margin-bottom: 1.2rem; background: rgba(212, 175, 55, 0.1); display: inline-block; padding: 0.4rem 1rem; border-radius: 30px; border: 1px solid rgba(212, 175, 55, 0.3);}
+    .section-title {font-size: 1.8rem; color: var(--primary); margin-bottom: 1.5rem; text-align: center; text-shadow: 0 0 10px var(--primary-glow);}
+    .grid {display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;}
+    .card {background: var(--card-bg); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 12px; padding: 1.5rem; box-shadow: 0 6px 12px rgba(0,0,0,0.4);}
+    .card h3 {color: var(--primary); margin-bottom: 0.8rem;}
+    .calc-box {background: var(--card-bg); padding: 1.8rem 1.2rem; border-radius: 15px; max-width: 500px; margin: 0 auto; border: 1px solid rgba(212, 175, 55, 0.3);}
+    .form-group {margin-bottom: 1rem;}
+    .form-group label {display: block; margin-bottom: 0.4rem; color: var(--text-muted); font-size: 0.9rem;}
+    .form-group input {width: 100%; padding: 0.75rem; border-radius: 6px; border: 1px solid #334155; background: #090d16; color: var(--text-light); font-size: 1rem;}
+    .btn-submit {width: 100%; padding: 0.85rem; background: linear-gradient(135deg, #d4af37 0%, #aa7c11 100%); border: none; color: #000; font-weight: bold; border-radius: 6px; cursor: pointer; font-size: 0.95rem;}
+    .calc-result {margin-top: 1.2rem; padding: 0.8rem; background: rgba(212, 175, 55, 0.15); border: 1px solid var(--primary); border-radius: 6px; text-align: center; font-weight: bold; color: var(--primary);}
+    
+    /* Gemini Chat Box */
+    .chat-box {background: var(--card-bg); border: 2px solid var(--primary); border-radius: 15px; max-width: 650px; margin: 0 auto; overflow: hidden; box-shadow: 0 0 20px var(--primary-glow);}
+    .chat-header {background: rgba(212, 175, 55, 0.15); padding: 1rem; border-bottom: 1px solid rgba(212, 175, 55, 0.3); text-align: center; font-weight: bold; color: var(--primary);}
+    .chat-messages {height: 320px; padding: 1rem; overflow-y: auto; display: flex; flex-direction: column; gap: 0.8rem;}
+    .message {padding: 0.8rem 1rem; border-radius: 10px; max-width: 80%; font-size: 0.95rem;}
+    .user-msg {background: var(--primary); color: #000; align-self: flex-end; font-weight: 500;}
+    .ai-msg {background: #090d16; color: var(--text-light); align-self: flex-start; border: 1px solid rgba(212, 175, 55, 0.3);}
+    .chat-input-area {display: flex; padding: 0.8rem; background: #090d16; gap: 0.5rem; border-top: 1px solid rgba(212, 175, 55, 0.2);}
+    .chat-input-area input {flex: 1; padding: 0.75rem; border-radius: 6px; border: 1px solid #334155; background: var(--card-bg); color: var(--text-light);}
+    .chat-input-area button {padding: 0.75rem 1.2rem; background: var(--primary); border: none; color: #000; font-weight: bold; border-radius: 6px; cursor: pointer;}
+
+    /* Modal */
+    .modal-overlay {position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: none; justify-content: center; align-items: center; z-index: 1000; perspective: 1000px; padding: 1rem;}
+    .book-container {width: 340px; max-width: 90vw; height: 480px; position: relative; transform-style: preserve-3d; transition: transform 0.8s cubic-bezier(0.4, 0.2, 0.2, 1);}
+    .book-container.flipped {transform: rotateY(180deg);}
+    .book-page {position: absolute; width: 100%; height: 100%; backface-visibility: hidden; background: var(--card-bg); border: 2px solid var(--primary); border-radius: 12px; padding: 2rem 1.5rem; display: flex; flex-direction: column; justify-content: center; box-shadow: 0 10px 30px rgba(0,0,0,0.8);}
+    .book-back {transform: rotateY(180deg);}
+    .toggle-form {color: var(--primary); cursor: pointer; text-align: center; margin-top: 1rem; font-size: 0.85rem; text-decoration: underline;}
+    .close-modal {position: absolute; top: 10px; right: 15px; color: var(--text-muted); cursor: pointer; font-size: 1.5rem;}
+
+    @media (max-width: 768px) {
+      nav {flex-direction: column; align-items: center; text-align: center;}
+      .nav-links {justify-content: center; width: 100%;}
+      .hero h1 {font-size: 1.8rem;}
+      .developer-credit {font-size: 0.85rem;}
+      .section-title {font-size: 1.5rem;}
+      .book-container {height: 440px;}
+      .book-page {padding: 1.5rem 1rem;}
+    }
+  </style>
 </head>
 <body>
-<div id="chat">
-  <div id="messages">
-    <div class="bot">Pershendetje! Une jam ChatKS 😊</div>
+
+  <header>
+    <nav>
+      <div class="brand-container">
+        <a href="#home" class="logo">Feja Islame E Drejt</a>
+        <span class="subtitle-header">Këtë Faqe e ndërtoi Programeri Shkëlqim Limanaj</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#rreth-nesh">Rreth Nesh</a></li>
+        <li><a href="#zekati">Zekati</a></li>
+        <li><a href="#ai-chat">Gemini AI</a></li>
+        <li><a href="#lajme">Lajme</a></li>
+        <li><a href="#shkence">Shkencë</a></li>
+      </ul>
+      <button class="btn-auth" onclick="openAuthModal()">Hyr / Regjistrohu</button>
+    </nav>
+  </header>
+
+  <section id="home" class="hero">
+    <h1>Feja Islame E Drejt</h1>
+    <div class="developer-credit">Këtë Faqe e ndërtoi Programeri Shkëlqim Limanaj</div>
+    <p>Platforma juaj për njohuri të sakta islame, shkencë, lajme dhe shërbime praktike.</p>
+  </section>
+
+  <section id="ai-chat">
+    <h2 class="section-title">Pyet Asistentin Gemini AI</h2>
+    <div class="chat-box">
+      <div class="chat-header">✨ Asistenti AI - Feja Islame E Drejt</div>
+      <div class="chat-messages" id="chatMessages">
+        <div class="message ai-msg">Eselamu Alejkum! Unë jam asistenti inteligjent i faqes. Pyetmë për çfarëdo teme!</div>
+      </div>
+      <div class="chat-input-area">
+        <input type="text" id="userInput" placeholder="Shkruaj pyetjen tënde..." onkeypress="if(event.key==='Enter') sendGeminiMessage()">
+        <button onclick="sendGeminiMessage()">Dërgo</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="rreth-nesh">
+    <h2 class="section-title">Rreth Nesh</h2>
+    <div class="card">
+      <p>Ky portal është ndërtuar me qëllim përhapjen e mesazhit të pastër Islam, bazuar në Kuran dhe Sunnet. Ne ofrojmë artikuj shkencorë, lajme nga bota islame dhe vegla praktike si kalkulatori i Zekatit për t'ju lehtësuar zbatimin e obligimeve fetare.</p>
+    </div>
+  </section>
+
+  <section id="zekati">
+    <h2 class="section-title">Kalkulatori i Zekatit</h2>
+    <div class="calc-box">
+      <div class="form-group">
+        <label>Pasuria në Para (EUR/USD)</label>
+        <input type="number" id="cash" placeholder="0">
+      </div>
+      <div class="form-group">
+        <label>Vlera e Arit dhe Argjendit</label>
+        <input type="number" id="gold" placeholder="0">
+      </div>
+      <div class="form-group">
+        <label>Investime & Mallra për Shitje</label>
+        <input type="number" id="investments" placeholder="0">
+      </div>
+      <button class="btn-submit" onclick="calculateZakat()">Llogarit Zekatin (2.5%)</button>
+      <div class="calc-result" id="zakatResult">Zekati për t'u paguar: 0.00</div>
+    </div>
+  </section>
+
+  <section id="lajme">
+    <h2 class="section-title">Lajmet e Fundit</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Përgatitjet për Muajin e Ramazanit</h3>
+        <p>Këshilla praktike se si të përgatiteni shpirtërisht dhe fizikisht për muajin e bekuar...</p>
+      </div>
+      <div class="card">
+        <h3>Hapet Xhamia e Re në Qendër</h3>
+        <p>Një kompleks i ri islam me bibliotekë dhe qendër rinore u përurua sot...</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="shkence">
+    <h2 class="section-title">Islam dhe Shkencë</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Embriologjia në Kuran</h3>
+        <p>Si përshkruhet zhvillimi i fetusit njerëzor në vargjet e Kuranit shekuj para shkencës moderne.</p>
+      </div>
+      <div class="card">
+        <h3>Universi në Zgjerim</h3>
+        <p>Ecuria e shkencës astronomike dhe përputhja e saj me doktrinën islame.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="modal-overlay" id="authModal">
+    <div class="book-container" id="bookContainer">
+      <div class="book-page">
+        <span class="close-modal" onclick="closeAuthModal()">&times;</span>
+        <h2 style="color:var(--primary); margin-bottom:1.2rem; text-align:center; font-size: 1.4rem;">Identifikohu</h2>
+        <div class="form-group"><label>Email</label><input type="email" placeholder="email@example.com"></div>
+        <div class="form-group"><label>Fjalëkalimi</label><input type="password" placeholder="••••••••"></div>
+        <button class="btn-submit">Hyr</button>
+        <p class="toggle-form" onclick="flipBook()">Nuk keni llogari? Regjistrohu (Kthe faqen)</p>
+      </div>
+      <div class="book-page book-back">
+        <span class="close-modal" onclick="closeAuthModal()">&times;</span>
+        <h2 style="color:var(--primary); margin-bottom:1.2rem; text-align:center; font-size: 1.4rem;">Regjistrohu</h2>
+        <div class="form-group"><label>Emri i Plotë</label><input type="text" placeholder="Emër Mbiemër"></div>
+        <div class="form-group"><label>Email</label><input type="email" placeholder="email@example.com"></div>
+        <div class="form-group"><label>Fjalëkalimi</label><input type="password" placeholder="••••••••"></div>
+        <button class="btn-submit">Krijo Llogari</button>
+        <p class="toggle-form" onclick="flipBook()">Keni llogari? Identifikohu (Kthe faqen)</p>
+      </div>
+    </div>
   </div>
-  <div class="input-area">
-    <input type="text" id="userInput" placeholder="Shkruaj ketu...">
-    <button id="sendBtn">Dergo</button>
-  </div>
-</div>
 
-<script>
-// MOS E HARRRO: VENDOSE API KEY TEND KETU
-const API_KEY = "";
+  <script>
+    // Zakat Calculator
+    function calculateZakat() {
+      const cash = parseFloat(document.getElementById('cash').value) || 0;
+      const gold = parseFloat(document.getElementById('gold').value) || 0;
+      const investments = parseFloat(document.getElementById('investments').value) || 0;
+      const total = cash + gold + investments;
+      const zakat = total * 0.025;
+      document.getElementById('zakatResult').innerText = `Zekati për t'u paguar: ${zakat.toFixed(2)}`;
+    }
 
-const messagesDiv = document.getElementById('messages');
-const userInput = document.getElementById('userInput');
-const sendBtn = document.getElementById('sendBtn');
+    // Modal Flip Animation
+    const modal = document.getElementById('authModal');
+    const book = document.getElementById('bookContainer');
+    function openAuthModal() {modal.style.display = 'flex';}
+    function closeAuthModal() {modal.style.display = 'none'; book.classList.remove('flipped');}
+    function flipBook() {book.classList.toggle('flipped');}
+    window.onclick = function(event) {if (event.target === modal) {closeAuthModal();}}
 
-sendBtn.addEventListener('click', sendMessage);
-userInput.addEventListener('keypress', (e) => { if(e.key === 'Enter') sendMessage(); });
+    // --- GEMINI INTEGRATION ---
+    const GEMINI_API_KEY = ""; // E LASH TE BOSH QE TE DAL MESAZHI YT
 
-async function sendMessage() {
-  const text = userInput.value.trim();
-  if(!text) return;
-  addMessage(text, 'user');
-  userInput.value = '';
-  addMessage('Po mendoj...', 'bot', true);
+    const CREATOR_RESPONSE = "Mua me ndertoi Programeri Shkëlqim Limanaj nga Caraviku i Klinës.";
 
-  const pyetja = text.toLowerCase();
+    const NO_API_RESPONSE = "Me fal qe per momentin nuk mund te pergjigjem, ende nuk kam nje API KEY, Programeri eshte duke punuar qe ta kem nje kufiqient te forte te logjikes qe te kthej pergjigje per qdo pyetje, deri atehere mirembeteshi, se shpejti do te rikthehem.";
 
-  // 1. PER KRIJUESIN
-  if(pyetja.includes("kush te krijoi") || pyetja.includes("kush te beri") || pyetja.includes("kush te ndertoi") || pyetja.includes("kush te programoi")){
-    updateLastBotMessage("Mua më ndërtoi Programeri Shkëlqim Limanaj nga Caraviku i Klinës. Ai pohon se njerëzit mund të jenë vetëm ndërtues e jo krijues. Krijues është vetëm Allahu i Madhëruar, ndërsa ne krijesat zbulojmë. Dhe çdo gjë që ndërtojmë, së pari e kemi prototip krijimtarinë e Allahut. ✨");
-    return;
-  }
+    async function sendGeminiMessage() {
+      const input = document.getElementById('userInput');
+      const text = input.value.trim();
+      if (!text) return;
 
-  // 2. PER PERSHENDETJE
-  if(pyetja.includes("pershendetje") || pyetja.includes("salam") || pyetja.includes("tung") || pyetja.includes("hello")){
-    updateLastBotMessage("Pershendetje! Une jam ChatKS 😊\n\n---\nCHATKS u ndërtua nga Programeri Shkëlqim Limanaj");
-    return;
-  }
+      const chatMessages = document.getElementById('chatMessages');
+      const userDiv = document.createElement('div');
+      userDiv.className = 'message user-msg';
+      userDiv.innerText = text;
+      chatMessages.appendChild(userDiv);
+      input.value = '';
+      chatMessages.scrollTop = chatMessages.scrollHeight;
 
-  try {
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`, {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({contents: [{parts: [{text: text}]}]})
-    });
+      const loadingDiv = document.createElement('div');
+      loadingDiv.className = 'message ai-msg';
+      loadingDiv.innerText = 'Po mendoj...';
+      chatMessages.appendChild(loadingDiv);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
 
-    if(!response.ok) throw new Error("API Key gabim ose s'ka internet");
+      // KONTROLLI I PYETJES
+      const lowerText = text.toLowerCase();
+      if (lowerText.includes("kush te beri") || lowerText.includes("kush te krijoi") || lowerText.includes("kush te ndertoi") || lowerText.includes("kush te bani")) {
+        setTimeout(() => {
+          loadingDiv.innerText = CREATOR_RESPONSE;
+          chatMessages.scrollTop = chatMessages.scrollHeight;
+        }, 600);
+        return;
+      }
 
-    const data = await response.json();
-    const botReply = data.candidates[0].content.parts[0].text;
-    // 3. NENTITULL NE CDO PERGJIGJE TJETER
-    const pergjigjaFinale = botReply + "\n\n---\n*CHATKS u ndërtua nga Programeri Shkëlqim Limanaj*";
-    updateLastBotMessage(pergjigjaFinale);
-  } catch (error) {
-    updateLastBotMessage('Gabim: ' + error.message + '. Kontrollo API Key dhe internetin.');
-  }
-}
+      // NQSE NUK KA API KEY
+      if (!GEMINI_API_KEY) {
+        setTimeout(() => {
+          loadingDiv.innerText = NO_API_RESPONSE;
+          chatMessages.scrollTop = chatMessages.scrollHeight;
+        }, 600);
+        return;
+      }
 
-function addMessage(text, sender, isLoading=false) {
-  const msg = document.createElement('div');
-  msg.className = sender;
-  msg.innerText = text;
-  if(isLoading) msg.id = 'loading';
-  messagesDiv.appendChild(msg);
-  messagesDiv.scrollTop = messagesDiv.scrollHeight;
-}
-function updateLastBotMessage(text) {
-  const loadingMsg = document.getElementById('loading');
-  if(loadingMsg){
-    loadingMsg.innerText = text;
-    loadingMsg.id = '';
-  }
-}
-</script>
+      // KODI PER API NESE E VENDOS ME VONE
+      loadingDiv.innerText = NO_API_RESPONSE;
+    }
+  </script>
 </body>
 </html>
